@@ -11,6 +11,7 @@ class Lexer:
   
   
   def checkTokens():
+      pass
       
   def advance(self):
     self.pos.advance(self.current_char)
