@@ -4,6 +4,7 @@ import os
 from Lexer import *
 from Parser_ import *
 
+
 #######################################
 # VALUES
 #######################################
@@ -549,10 +550,16 @@ class BuiltInFunction(BaseFunction):
             ))
 
         fn = fn.value
-
         try:
-            with open(fn, "r") as f:
-                script = f.read()
+            if fn.endswith(".gzpp"):
+                with open(fn, "r") as f:
+                    script = f.read()
+            else:
+                return RTResult().failure(RTError(
+                    self.pos_start, self.pos_end,
+                    f"Wrong file extension  \"{fn}\" : must be \".gzpp file\" \n",
+                    exec_ctx
+                ))
         except Exception as e:
             return RTResult().failure(RTError(
                 self.pos_start, self.pos_end,
