@@ -1,6 +1,7 @@
 from Token import *
 from Error import *
 from Variables import *
+from Position import *
 
 #Lexer
 class Lexer:

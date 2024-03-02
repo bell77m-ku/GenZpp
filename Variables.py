@@ -1,3 +1,6 @@
+import string
+
+
 TT_INT			= 'INT'
 TT_FLOAT    	= 'FLOAT'
 TT_STRING		= 'STRING'
@@ -23,6 +26,10 @@ TT_COMMA		= 'COMMA'
 TT_ARROW		= 'ARROW'
 TT_NEWLINE		= 'NEWLINE'
 TT_EOF			= 'EOF'
+
+DIGITS = '0123456789'
+LETTERS = string.ascii_letters
+LETTERS_DIGITS = LETTERS + DIGITS
 
 KEYWORDS = [
   'VAR',
