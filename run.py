@@ -1,9 +1,10 @@
 from Values import *
 
 while True:
-    text = input('basic > ')
-    if text.strip() == "": continue
-    result, error = run('<stdin>', text)
+    text = input("basic > ")
+    if text.strip() == "":
+        continue
+    result, error = run("<stdin>", text)
 
     if error:
         print(error.as_string())

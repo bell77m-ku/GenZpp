@@ -1,8 +1,8 @@
-from Token import *
-from Error import *
-from Variables import *
-from Position import *
 from Constant import *
+from Error import *
+from Position import *
+from Token import *
+from Variables import *
 
 
 # Lexer
@@ -16,17 +16,19 @@ class Lexer:
 
     def advance(self):
         self.pos.advance(self.current_char)
-        self.current_char = self.text[self.pos.idx] if self.pos.idx < len(self.text) else None
+        self.current_char = (
+            self.text[self.pos.idx] if self.pos.idx < len(self.text) else None
+        )
 
     def make_tokens(self):
         tokens = []
 
         while self.current_char is not None:
-            if self.current_char in ' \t':
+            if self.current_char in " \t":
                 self.advance()
-            elif self.current_char == '#':
+            elif self.current_char == "#":
                 self.skip_comment()
-            elif self.current_char in ';\n':
+            elif self.current_char in ";\n":
                 tokens.append(Token(TT_NEWLINE, pos_start=self.pos))
                 self.advance()
             elif self.current_char in DIGITS:
@@ -35,43 +37,44 @@ class Lexer:
                 tokens.append(self.make_identifier())
             elif self.current_char == '"':
                 tokens.append(self.make_string())
-            elif self.current_char == '+':
+            elif self.current_char == "+":
                 tokens.append(Token(TT_PLUS, pos_start=self.pos))
                 self.advance()
-            elif self.current_char == '-':
+            elif self.current_char == "-":
                 tokens.append(self.make_minus_or_arrow())
-            elif self.current_char == '*':
+            elif self.current_char == "*":
                 tokens.append(Token(TT_MUL, pos_start=self.pos))
                 self.advance()
-            elif self.current_char == '/':
+            elif self.current_char == "/":
                 tokens.append(Token(TT_DIV, pos_start=self.pos))
                 self.advance()
-            elif self.current_char == '^':
+            elif self.current_char == "^":
                 tokens.append(Token(TT_POW, pos_start=self.pos))
                 self.advance()
-            elif self.current_char == '(':
+            elif self.current_char == "(":
                 tokens.append(Token(TT_LPAREN, pos_start=self.pos))
                 self.advance()
-            elif self.current_char == ')':
+            elif self.current_char == ")":
                 tokens.append(Token(TT_RPAREN, pos_start=self.pos))
                 self.advance()
-            elif self.current_char == '[':
+            elif self.current_char == "[":
                 tokens.append(Token(TT_LSQUARE, pos_start=self.pos))
                 self.advance()
-            elif self.current_char == ']':
+            elif self.current_char == "]":
                 tokens.append(Token(TT_RSQUARE, pos_start=self.pos))
                 self.advance()
-            elif self.current_char == '!':
+            elif self.current_char == "!":
                 token, error = self.make_not_equals()
-                if error: return [], error
+                if error:
+                    return [], error
                 tokens.append(token)
-            elif self.current_char == '=':
+            elif self.current_char == "=":
                 tokens.append(self.make_equals())
-            elif self.current_char == '<':
+            elif self.current_char == "<":
                 tokens.append(self.make_less_than())
-            elif self.current_char == '>':
+            elif self.current_char == ">":
                 tokens.append(self.make_greater_than())
-            elif self.current_char == ',':
+            elif self.current_char == ",":
                 tokens.append(Token(TT_COMMA, pos_start=self.pos))
                 self.advance()
             else:
@@ -84,13 +87,14 @@ class Lexer:
         return tokens, None
 
     def make_number(self):
-        num_str = ''
+        num_str = ""
         dot_count = 0
         pos_start = self.pos.copy()
 
-        while self.current_char is not None and self.current_char in DIGITS + '.':
-            if self.current_char == '.':
-                if dot_count == 1: break
+        while self.current_char is not None and self.current_char in DIGITS + ".":
+            if self.current_char == ".":
+                if dot_count == 1:
+                    break
                 dot_count += 1
             num_str += self.current_char
             self.advance()
@@ -101,35 +105,36 @@ class Lexer:
             return Token(TT_FLOAT, float(num_str), pos_start, self.pos)
 
     def make_string(self):
-        string = ''
+        str_ = ""
         pos_start = self.pos.copy()
         escape_character = False
         self.advance()
 
-        escape_characters = {
-            'n': '\n',
-            't': '\t'
-        }
+        escape_characters = {"n": "\n", "t": "\t"}
 
-        while self.current_char is not None and (self.current_char != '"' or escape_character):
+        while self.current_char is not None and (
+            self.current_char != '"' or escape_character
+        ):
             if escape_character:
-                string += escape_characters.get(self.current_char, self.current_char)
+                str_ += escape_characters.get(self.current_char, self.current_char)
             else:
-                if self.current_char == '\\':
+                if self.current_char == "\\":
                     escape_character = True
                 else:
-                    string += self.current_char
+                    str_ += self.current_char
             self.advance()
             escape_character = False
 
         self.advance()
-        return Token(TT_STRING, string, pos_start, self.pos)
+        return Token(TT_STRING, str_, pos_start, self.pos)
 
     def make_identifier(self):
-        id_str = ''
+        id_str = ""
         pos_start = self.pos.copy()
 
-        while self.current_char is not None and self.current_char in LETTERS_DIGITS + '_':
+        while (
+            self.current_char is not None and self.current_char in LETTERS_DIGITS + "_"
+        ):
             id_str += self.current_char
             self.advance()
 
@@ -141,7 +146,7 @@ class Lexer:
         pos_start = self.pos.copy()
         self.advance()
 
-        if self.current_char == '>':
+        if self.current_char == ">":
             self.advance()
             tok_type = TT_ARROW
 
@@ -151,7 +156,7 @@ class Lexer:
         pos_start = self.pos.copy()
         self.advance()
 
-        if self.current_char == '=':
+        if self.current_char == "=":
             self.advance()
             return Token(TT_NE, pos_start=pos_start, pos_end=self.pos), None
 
@@ -163,7 +168,7 @@ class Lexer:
         pos_start = self.pos.copy()
         self.advance()
 
-        if self.current_char == '=':
+        if self.current_char == "=":
             self.advance()
             tok_type = TT_EE
 
@@ -174,7 +179,7 @@ class Lexer:
         pos_start = self.pos.copy()
         self.advance()
 
-        if self.current_char == '=':
+        if self.current_char == "=":
             self.advance()
             tok_type = TT_LTE
 
@@ -185,7 +190,7 @@ class Lexer:
         pos_start = self.pos.copy()
         self.advance()
 
-        if self.current_char == '=':
+        if self.current_char == "=":
             self.advance()
             tok_type = TT_GTE
 
@@ -194,7 +199,7 @@ class Lexer:
     def skip_comment(self):
         self.advance()
 
-        while self.current_char != '\n':
+        while self.current_char != "\n":
             self.advance()
 
         self.advance()
