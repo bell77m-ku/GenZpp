@@ -213,6 +213,7 @@ Number.null = Number(0)
 Number.false = Number(0)
 Number.true = Number(1)
 Number.math_PI = Number(math.pi)
+Number.math_E = Number(math.e)
 
 
 class String(Value):
@@ -433,16 +434,16 @@ class BuiltInFunction(BaseFunction):
 
     #####################################
 
-    def execute_print(self, exec_ctx):
+    def execute_criticize(self, exec_ctx):
         print(str(exec_ctx.symbol_table.get("value")))
         return RTResult().success(Number.null)
 
-    execute_print.arg_names = ["value"]
+    execute_criticize.arg_names = ["value"]
 
-    def execute_print_ret(self, exec_ctx):
+    def execute_criticize_ret(self, exec_ctx):
         return RTResult().success(String(str(exec_ctx.symbol_table.get("value"))))
 
-    execute_print_ret.arg_names = ["value"]
+    execute_criticize_ret.arg_names = ["value"]
 
     def execute_input(self, exec_ctx):
         text = input()
@@ -491,6 +492,28 @@ class BuiltInFunction(BaseFunction):
         return RTResult().success(Number.true if is_number else Number.false)
 
     execute_is_function.arg_names = ["value"]
+
+    def execute_tfw(self, exec_ctx):
+        list_ = exec_ctx.symbol_table.get("list")
+        index = exec_ctx.symbol_table.get("index")
+        if not isinstance(list_, List):
+            return RTResult().failure(
+                RTError(self.pos_start, self.pos_end, "Argument must be list", exec_ctx)
+            )
+        try:
+            val = list_.elements[index.value]
+        except:
+            return RTResult().failure(
+                RTError(
+                    self.pos_start,
+                    self.pos_end,
+                    "Index is out of bounds",
+                    exec_ctx,
+                )
+            )
+        return RTResult().success(val)
+
+    execute_tfw.arg_names = ["list", "index"]
 
     def execute_append(self, exec_ctx):
         list_ = exec_ctx.symbol_table.get("list")
@@ -579,6 +602,23 @@ class BuiltInFunction(BaseFunction):
 
     execute_extend.arg_names = ["listA", "listB"]
 
+    def execute_sus(self, exec_ctx):
+        sus_ = exec_ctx.symbol_table.get("value")
+        r = 0
+        try:
+            bool(sus_.value)
+            if sus_.value == 0:
+                r = 1
+            elif sus_.value == 1:
+                r = 0
+        except:
+            return RTResult().failure(
+                RTError(self.pos_start, self.pos_end, "You SUS", exec_ctx)
+            )
+        return RTResult().success(Number(r))
+
+    execute_sus.arg_names = ["value"]
+
     def execute_len(self, exec_ctx):
         list_ = exec_ctx.symbol_table.get("list")
 
@@ -645,8 +685,8 @@ class BuiltInFunction(BaseFunction):
     execute_run.arg_names = ["fn"]
 
 
-BuiltInFunction.print = BuiltInFunction("print")
-BuiltInFunction.print_ret = BuiltInFunction("print_ret")
+BuiltInFunction.criticize = BuiltInFunction("criticize")
+BuiltInFunction.criticize_ret = BuiltInFunction("criticize_ret")
 BuiltInFunction.input = BuiltInFunction("input")
 BuiltInFunction.input_int = BuiltInFunction("input_int")
 BuiltInFunction.clear = BuiltInFunction("clear")
@@ -659,6 +699,8 @@ BuiltInFunction.pop = BuiltInFunction("pop")
 BuiltInFunction.extend = BuiltInFunction("extend")
 BuiltInFunction.len = BuiltInFunction("len")
 BuiltInFunction.run = BuiltInFunction("run")
+BuiltInFunction.tfw = BuiltInFunction("tfw")
+BuiltInFunction.sus = BuiltInFunction("sus")
 
 
 #######################################
@@ -1010,8 +1052,8 @@ global_symbol_table.set("NULL", Number.null)
 global_symbol_table.set("L", Number.false)
 global_symbol_table.set("W", Number.true)
 global_symbol_table.set("MATH_PI", Number.math_PI)
-global_symbol_table.set("PRINT", BuiltInFunction.print)
-global_symbol_table.set("PRINT_RET", BuiltInFunction.print_ret)
+global_symbol_table.set("CRITICIZE", BuiltInFunction.criticize)
+global_symbol_table.set("CRITICIZE_RET", BuiltInFunction.criticize_ret)
 global_symbol_table.set("INPUT", BuiltInFunction.input)
 global_symbol_table.set("INPUT_INT", BuiltInFunction.input_int)
 global_symbol_table.set("CLEAR", BuiltInFunction.clear)
@@ -1025,6 +1067,9 @@ global_symbol_table.set("POP", BuiltInFunction.pop)
 global_symbol_table.set("EXTEND", BuiltInFunction.extend)
 global_symbol_table.set("LEN", BuiltInFunction.len)
 global_symbol_table.set("RUN", BuiltInFunction.run)
+global_symbol_table.set("TFW", BuiltInFunction.tfw)
+global_symbol_table.set("MATH_E", Number.math_E)
+global_symbol_table.set("SUS", BuiltInFunction.sus)
 
 
 def run(fn, text):

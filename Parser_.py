@@ -92,14 +92,14 @@ class Parser:
                 ReturnNode(expr, pos_start, self.current_tok.pos_start.copy())
             )
 
-        if self.current_tok.matches(TT_KEYWORD, "CONTINUE"):
+        if self.current_tok.matches(TT_KEYWORD, "BET"):
             res.register_advancement()
             self.advance()
             return res.success(
                 ContinueNode(pos_start, self.current_tok.pos_start.copy())
             )
 
-        if self.current_tok.matches(TT_KEYWORD, "BREAK"):
+        if self.current_tok.matches(TT_KEYWORD, "CRINGE"):
             res.register_advancement()
             self.advance()
             return res.success(BreakNode(pos_start, self.current_tok.pos_start.copy()))
@@ -120,7 +120,7 @@ class Parser:
     def expr(self):
         res = ParseResult()
 
-        if self.current_tok.matches(TT_KEYWORD, "VAR"):
+        if self.current_tok.matches(TT_KEYWORD, "BITCH"):
             res.register_advancement()
             self.advance()
 
@@ -129,7 +129,7 @@ class Parser:
                     InvalidSyntaxError(
                         self.current_tok.pos_start,
                         self.current_tok.pos_end,
-                        "Expected identifier",
+                        "Expected a BITCH!",
                     )
                 )
 
@@ -171,7 +171,7 @@ class Parser:
     def comp_expr(self):
         res = ParseResult()
 
-        if self.current_tok.matches(TT_KEYWORD, "NOT"):
+        if self.current_tok.matches(TT_KEYWORD, "BRUH"):
             op_tok = self.current_tok
             res.register_advancement()
             self.advance()
@@ -317,19 +317,19 @@ class Parser:
                 return res
             return res.success(if_expr)
 
-        elif tok.matches(TT_KEYWORD, "FOR"):
+        elif tok.matches(TT_KEYWORD, "SIDE_HUSTLE"):
             for_expr = res.register(self.for_expr())
             if res.error:
                 return res
             return res.success(for_expr)
 
-        elif tok.matches(TT_KEYWORD, "WHILE"):
+        elif tok.matches(TT_KEYWORD, "CORPORATE_JOB"):
             while_expr = res.register(self.while_expr())
             if res.error:
                 return res
             return res.success(while_expr)
 
-        elif tok.matches(TT_KEYWORD, "FUN"):
+        elif tok.matches(TT_KEYWORD, "JOB"):
             func_def = res.register(self.func_def())
             if res.error:
                 return res
@@ -339,7 +339,7 @@ class Parser:
             InvalidSyntaxError(
                 tok.pos_start,
                 tok.pos_end,
-                "Expected int, float, identifier, '+', '-', '(', '[', IF', 'FOR', 'WHILE', 'FUN'",
+                "How dare you assume my identifier?",
             )
         )
 
@@ -370,8 +370,7 @@ class Parser:
                     InvalidSyntaxError(
                         self.current_tok.pos_start,
                         self.current_tok.pos_end,
-                        "Expected ']', 'VAR', 'IF', 'FOR', 'WHILE', 'FUN', int, float, identifier, '+', '-', '(', "
-                        "'[' or 'NOT'",
+                        "Expected ']', 'VAR', 'IF', 'FOR', 'WHILE', 'FUN', int, float, identifier, '+', '-', '(', '[' or 'NOT'",
                     )
                 )
 
@@ -408,13 +407,13 @@ class Parser:
         return res.success(IfNode(cases, else_case))
 
     def if_expr_b(self):
-        return self.if_expr_cases("ELIF")
+        return self.if_expr_cases("OTHERWISE_IF")
 
     def if_expr_c(self):
         res = ParseResult()
         else_case = None
 
-        if self.current_tok.matches(TT_KEYWORD, "ELSE"):
+        if self.current_tok.matches(TT_KEYWORD, "OTHERWISE"):
             res.register_advancement()
             self.advance()
 
@@ -427,7 +426,7 @@ class Parser:
                     return res
                 else_case = (statements, True)
 
-                if self.current_tok.matches(TT_KEYWORD, "END"):
+                if self.current_tok.matches(TT_KEYWORD, "PUT_IN_2_WEEKS"):
                     res.register_advancement()
                     self.advance()
                 else:
@@ -435,7 +434,7 @@ class Parser:
                         InvalidSyntaxError(
                             self.current_tok.pos_start,
                             self.current_tok.pos_end,
-                            "Expected 'END'",
+                            "Don't forget to PUT_IN_2_WEEKS",
                         )
                     )
             else:
@@ -450,7 +449,7 @@ class Parser:
         res = ParseResult()
         cases, else_case = [], None
 
-        if self.current_tok.matches(TT_KEYWORD, "ELIF"):
+        if self.current_tok.matches(TT_KEYWORD, "OTHERWISE_IF"):
             all_cases = res.register(self.if_expr_b())
             if res.error:
                 return res
@@ -488,7 +487,7 @@ class Parser:
                 InvalidSyntaxError(
                     self.current_tok.pos_start,
                     self.current_tok.pos_end,
-                    f"Expected 'THEN'",
+                    f"THEN what? you twat!",
                 )
             )
 
@@ -503,8 +502,8 @@ class Parser:
             if res.error:
                 return res
             cases.append((condition, statements, True))
-
-            if self.current_tok.matches(TT_KEYWORD, "END"):
+            #END-IF
+            if self.current_tok.matches(TT_KEYWORD, "PUT_IN_2_WEEKS"):
                 res.register_advancement()
                 self.advance()
             else:
@@ -530,12 +529,12 @@ class Parser:
     def for_expr(self):
         res = ParseResult()
 
-        if not self.current_tok.matches(TT_KEYWORD, "FOR"):
+        if not self.current_tok.matches(TT_KEYWORD, "SIDE_HUSTLE"):
             return res.failure(
                 InvalidSyntaxError(
                     self.current_tok.pos_start,
                     self.current_tok.pos_end,
-                    f"Expected 'FOR'",
+                    f"Go dropship for SIDE_HUSTLE!",
                 )
             )
 
@@ -602,7 +601,7 @@ class Parser:
                 InvalidSyntaxError(
                     self.current_tok.pos_start,
                     self.current_tok.pos_end,
-                    f"Expected 'THEN'",
+                    f"THEN what? you twat!",
                 )
             )
 
@@ -617,12 +616,13 @@ class Parser:
             if res.error:
                 return res
 
-            if not self.current_tok.matches(TT_KEYWORD, "END"):
+            #END-FOR
+            if not self.current_tok.matches(TT_KEYWORD, "PUT_IN_2_WEEKS"):
                 return res.failure(
                     InvalidSyntaxError(
                         self.current_tok.pos_start,
                         self.current_tok.pos_end,
-                        f"Expected 'END'",
+                        f"Don't forget to PUT_IN_2_WEEKS!",
                     )
                 )
 
@@ -644,12 +644,12 @@ class Parser:
     def while_expr(self):
         res = ParseResult()
 
-        if not self.current_tok.matches(TT_KEYWORD, "WHILE"):
+        if not self.current_tok.matches(TT_KEYWORD, "CORPORATE_JOB"):
             return res.failure(
                 InvalidSyntaxError(
                     self.current_tok.pos_start,
                     self.current_tok.pos_end,
-                    f"Expected 'WHILE'",
+                    f"Go work 9 to 5!",
                 )
             )
 
@@ -665,7 +665,7 @@ class Parser:
                 InvalidSyntaxError(
                     self.current_tok.pos_start,
                     self.current_tok.pos_end,
-                    f"Expected 'THEN'",
+                    f"THEN what? you twat!",
                 )
             )
 
@@ -679,13 +679,13 @@ class Parser:
             body = res.register(self.statements())
             if res.error:
                 return res
-
-            if not self.current_tok.matches(TT_KEYWORD, "END"):
+            #END-WHILE
+            if not self.current_tok.matches(TT_KEYWORD, "PUT_IN_2_WEEKS"):
                 return res.failure(
                     InvalidSyntaxError(
                         self.current_tok.pos_start,
                         self.current_tok.pos_end,
-                        f"Expected 'END'",
+                        f"Don't forget to PUT_IN_2_WEEKS!",
                     )
                 )
 
@@ -703,12 +703,12 @@ class Parser:
     def func_def(self):
         res = ParseResult()
 
-        if not self.current_tok.matches(TT_KEYWORD, "FUN"):
+        if not self.current_tok.matches(TT_KEYWORD, "JOB"):
             return res.failure(
                 InvalidSyntaxError(
                     self.current_tok.pos_start,
                     self.current_tok.pos_end,
-                    f"Expected 'FUN'",
+                    f"Go get a JOB!",
                 )
             )
 
@@ -810,13 +810,13 @@ class Parser:
         body = res.register(self.statements())
         if res.error:
             return res
-
-        if not self.current_tok.matches(TT_KEYWORD, "END"):
+        #END-FUN
+        if not self.current_tok.matches(TT_KEYWORD, "PUT_IN_2_WEEKS"):
             return res.failure(
                 InvalidSyntaxError(
                     self.current_tok.pos_start,
                     self.current_tok.pos_end,
-                    f"Expected 'END'",
+                    f"QUIT YOUR JOB!",
                 )
             )
 

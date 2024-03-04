@@ -1,7 +1,11 @@
 from Values import *
 
+
+
 while True:
-    text = input("basic > ")
+    text = input("GENZ++ >> ")
+    if text == "#SHUT_UP!":
+        exit()
     if text.strip() == "":
         continue
     result, error = run("<stdin>", text)
