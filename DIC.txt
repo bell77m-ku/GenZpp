@@ -1,0 +1,27 @@
+RUN("example.gzpp")
+
+
+VAR - BITCH
+FUN - JOB
+END - PUT_IN_2_WEEKS
+FOR - SIDE_HUSTLE
+WHILE - CORPORATE_JOB
+TRUE - W
+FALSE - L
+CONTINUE - BET
+BREAK - CRINGE
+"NOTTHING" - BRUH
+PRINT() - CRITICIZE
+INDEX() - TFW
+"NOT OPERATOR" - SUS
+elif - OTHERWISE_IF
+else - OTHERWISE
+if - IF
+
+
+
+How dare you assume my identifier?
+"Don't forget to PUT_IN_2_WEEKS!"
+THEN what? you twat!
+
+Expected 'THEN'
