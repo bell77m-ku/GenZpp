@@ -1,5 +1,2 @@
-import emoji
-
-emoji_char = emoji.emojize(":smiling_face_with_smiling_eyes:")
-print(len(emoji_char))  # Output will be "😊"
-
+if __name__ == "__main__":
+    print("hello world")

@@ -216,6 +216,7 @@ Number.math_PI = Number(math.pi)
 Number.math_E = Number(math.e)
 
 
+
 class String(Value):
     def __init__(self, value):
         super().__init__()
@@ -514,6 +515,26 @@ class BuiltInFunction(BaseFunction):
         return RTResult().success(val)
 
     execute_tfw.arg_names = ["list", "index"]
+    def execute_condemn(self, exec_ctx):
+        list_ = exec_ctx.symbol_table.get("list")
+        index = exec_ctx.symbol_table.get("index")
+        val = exec_ctx.symbol_table.get("value")
+
+        try:
+            list_.elements[index.value] = val
+        except:
+            return RTResult().failure(
+                RTError(
+                    self.pos_start,
+                    self.pos_end,
+                    "Index is out of bounds",
+                    exec_ctx,
+                )
+            )
+        return RTResult().success(Number.null)
+
+    execute_condemn.arg_names = ["list", "index", "value"]
+
 
     def execute_append(self, exec_ctx):
         list_ = exec_ctx.symbol_table.get("list")
@@ -533,6 +554,25 @@ class BuiltInFunction(BaseFunction):
         return RTResult().success(Number.null)
 
     execute_append.arg_names = ["list", "value"]
+
+
+    def execute_log(self, exec_ctx):
+        x = exec_ctx.symbol_table.get("x")
+        base = exec_ctx.symbol_table.get("base")
+        try:
+            l = math.log(x.value, base.value)
+        except:
+            return RTResult().failure(
+                RTError(
+                    self.pos_start,
+                    self.pos_end,
+                    "Big yikes, the LOG is IMPOSSIBLE!",
+                    exec_ctx,
+                )
+            )
+
+        return RTResult().success(Number(l))
+    execute_log.arg_names = ["x", "base"]
 
     def execute_pop(self, exec_ctx):
         list_ = exec_ctx.symbol_table.get("list")
@@ -701,7 +741,8 @@ BuiltInFunction.len = BuiltInFunction("len")
 BuiltInFunction.run = BuiltInFunction("run")
 BuiltInFunction.tfw = BuiltInFunction("tfw")
 BuiltInFunction.sus = BuiltInFunction("sus")
-
+BuiltInFunction.log = BuiltInFunction("log")
+BuiltInFunction.condemn = BuiltInFunction("condemn")
 
 #######################################
 # CONTEXT
@@ -1053,6 +1094,7 @@ global_symbol_table.set("L", Number.false)
 global_symbol_table.set("W", Number.true)
 global_symbol_table.set("MATH_PI", Number.math_PI)
 global_symbol_table.set("CRITICIZE", BuiltInFunction.criticize)
+global_symbol_table.set("TWEET", BuiltInFunction.criticize)
 global_symbol_table.set("CRITICIZE_RET", BuiltInFunction.criticize_ret)
 global_symbol_table.set("INPUT", BuiltInFunction.input)
 global_symbol_table.set("INPUT_INT", BuiltInFunction.input_int)
@@ -1070,7 +1112,8 @@ global_symbol_table.set("RUN", BuiltInFunction.run)
 global_symbol_table.set("TFW", BuiltInFunction.tfw)
 global_symbol_table.set("MATH_E", Number.math_E)
 global_symbol_table.set("SUS", BuiltInFunction.sus)
-
+global_symbol_table.set("LOG", BuiltInFunction.log)
+global_symbol_table.set("CONDEMN", BuiltInFunction.condemn)
 
 def run(fn, text):
     # Generate tokens
