@@ -10,9 +10,8 @@ this project was made for amusement and entertainment value.
 
 A computer trying to execute GenZ++ scripts required python 3 in order to execute “Main_character.py” file
 
-To start using [Language Name], follow these steps:
-1.Clone the repository:  git clone https://github.com/bell77m-ku/RudeLang.git
-2.
+To start using GenZ++, follow these steps:
+
    
 
 GenZ++, like any other computer languages, can be used for basic and complex arithmetic albeit with “Gen Z” languages for syntax.
