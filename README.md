@@ -30,3 +30,22 @@ GenZ++, like any other computer languages, can be used for basic and complex ari
 - Extensive functions that doesn’t do anything bruh
 - Instead of true and false it’s all W or L
 - No boomer zone. OK boomer.
+
+> This is comparison of ' Python language(Left side) ' and 'GenZ++(right side)' .
+
+VAR - BITCH   
+FUN - JOB   
+END - PUT_IN_2_WEEKS   
+FOR - SIDE_HUSTLE   
+WHILE - CORPORATE_JOB   
+TRUE - W   
+FALSE - L   
+CONTINUE - BET   
+BREAK - CRINGE   
+NOTHING - BRUH   
+INDEX() - TFW   
+PRINT() - CRITICIZE   
+'NOT OPERATOR' - SUS   
+ELSE - OTHERWISE     
+ELIF - OTHERWISE_IF   
+RANDOM() - GACHA   
