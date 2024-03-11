@@ -10,17 +10,17 @@ this project was made for amusement and entertainment value.
 
 
 To start using GenZ++, follow these steps:
-- 1)Go to the GitHub repository: https://github.com/bell77m-ku/RudeLang
-- 2) click on the "Download ZIP" option.
-- 3) Once the download is complete, locate the zip file in your downloads folder or the location you specified for downloads.
-- 4) Extract the contents of the zip file to access the files and folders within the repository.
+- 1.Go to the GitHub repository: https://github.com/bell77m-ku/RudeLang
+- 2.Click on the "Download ZIP" option.
+- 3.Once the download is complete, locate the zip file in your downloads folder or the location you specified for downloads.
+- 4.Extract the contents of the zip file to access the files and folders within the repository.
 
 
 
 How to use GenZ++
-- 1. Write code in a new file with extension genz++.
-- 2. select a file name Main_character.py then run this file (A computer trying to execute GenZ++ scripts required python 3 in order to execute “Main_character.py” file)
-- 3. In the terminal, call the run() function. To run the code.gzpp by run("filename.gzpp")
+- 1.Write code in a new file with extension genz++.
+- 2.Select a file name Main_character.py then run this file (A computer trying to execute GenZ++ scripts required python 3 in order to execute “Main_character.py” file)
+- 3.In the terminal, call the run() function. To run the code.gzpp by run("filename.gzpp")
 
    
 
