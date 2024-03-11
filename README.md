@@ -18,7 +18,7 @@ To start using GenZ++, follow these steps:
 
 
 How to use GenZ++
-- 1.Write code in a new file with extension genz++.
+- 1.Write code in a new file with extension .gzpp
 - 2.Select a file name Main_character.py then run this file (A computer trying to execute GenZ++ scripts required python 3 in order to execute “Main_character.py” file)
 - 3.In the terminal, call the run() function. To run the code.gzpp by run("filename.gzpp")
 
