@@ -10,10 +10,10 @@ this project was made for amusement and entertainment value.
 
 
 To start using GenZ++, follow these steps:
-- 1. Go to the GitHub repository: https://github.com/bell77m-ku/RudeLang
-- 2. click on the "Download ZIP" option.
-- 3. Once the download is complete, locate the zip file in your downloads folder or the location you specified for downloads.
-- 4. Extract the contents of the zip file to access the files and folders within the repository.
+- 1) Go to the GitHub repository: https://github.com/bell77m-ku/RudeLang
+- 2) click on the "Download ZIP" option.
+- 3) Once the download is complete, locate the zip file in your downloads folder or the location you specified for downloads.
+- 4) Extract the contents of the zip file to access the files and folders within the repository.
 
 
 
