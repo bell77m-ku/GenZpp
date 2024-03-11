@@ -8,7 +8,6 @@ GenZ++
 GenZ++ is an interpreted esoteric computer language based on Python written by us, 4 broke college students.
 this project was made for amusement and entertainment value.
 
-A computer trying to execute GenZ++ scripts required python 3 in order to execute “Main_character.py” file
 
 To start using GenZ++, follow these steps:
 - 1.Go to the GitHub repository: https://github.com/bell77m-ku/RudeLang
@@ -19,7 +18,9 @@ To start using GenZ++, follow these steps:
 
 
 How to use GenZ++
-1.Write code in a new file with extension genz++.
+- 1.Write code in a new file with extension genz++.
+- 2.select a file name Main_character.py then run this file (A computer trying to execute GenZ++ scripts required python 3 in order to execute “Main_character.py” file)
+- 3.In the terminal, call the run() function. To run the code.gzpp by run("filename.gzpp")
 
    
 
