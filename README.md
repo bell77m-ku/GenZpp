@@ -3,7 +3,7 @@ READ ME!!!!
 This repository contains projects related to my own programming language, 
 
 <Computer Architechture Project>
-GenZ++
+
 
 GenZ++ is an interpreted esoteric computer language based on Python written by us, 4 broke college students.
 this project was made for amusement and entertainment value.
