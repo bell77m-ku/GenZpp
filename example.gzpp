@@ -1,13 +1,7 @@
-BITCH a = "A"
-BITCH b = ["H", "A", 1]
+BITCH whitePeople = "Hello World"
+BITCH  A = [1,2,3]
+#TWEET(A)
 
-IF W THEN
-    SIDE_HUSTLE i=0 TO 2 THEN
-        CRITICIZE(TFW(b, i))
-    PUT_IN_2_WEEKS
-OTHERWISE
-    CRITICIZE(MATH_E)
+SIDE_HUSTLE i=1 TO 5  THEN
+CRITICIZE(i). TWEET(""). CRITICIZE("BRAH").
 PUT_IN_2_WEEKS
-
-
-

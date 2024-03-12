@@ -1,5 +1,6 @@
 import math
 import os
+import random
 
 from Lexer import *
 from Parser_ import *
@@ -436,11 +437,16 @@ class BuiltInFunction(BaseFunction):
     #####################################
 
     def execute_criticize(self, exec_ctx):
-        print(str(exec_ctx.symbol_table.get("value")))
+        print(str(exec_ctx.symbol_table.get("value")), end="")
         return RTResult().success(Number.null)
 
     execute_criticize.arg_names = ["value"]
 
+    def execute_tweet(self, exec_ctx):
+        print(str(exec_ctx.symbol_table.get("value")))
+        return RTResult().success(Number.null)
+
+    execute_tweet.arg_names = ["value"]
     def execute_criticize_ret(self, exec_ctx):
         return RTResult().success(String(str(exec_ctx.symbol_table.get("value"))))
 
@@ -459,7 +465,7 @@ class BuiltInFunction(BaseFunction):
                 number = int(text)
                 break
             except ValueError:
-                print(f"'{text}' must be an integer. Try again!")
+                print(f"'{text}' must be an integer. DUMB ASS!")
         return RTResult().success(Number(number))
 
     execute_input_int.arg_names = []
@@ -499,7 +505,7 @@ class BuiltInFunction(BaseFunction):
         index = exec_ctx.symbol_table.get("index")
         if not isinstance(list_, List):
             return RTResult().failure(
-                RTError(self.pos_start, self.pos_end, "Argument must be list", exec_ctx)
+                RTError(self.pos_start, self.pos_end, "On god, argument must be list ", exec_ctx)
             )
         try:
             val = list_.elements[index.value]
@@ -508,7 +514,7 @@ class BuiltInFunction(BaseFunction):
                 RTError(
                     self.pos_start,
                     self.pos_end,
-                    "Index is out of bounds",
+                    "Index is out of this world",
                     exec_ctx,
                 )
             )
@@ -527,14 +533,13 @@ class BuiltInFunction(BaseFunction):
                 RTError(
                     self.pos_start,
                     self.pos_end,
-                    "Index is out of bounds",
+                    "Index is out of this world",
                     exec_ctx,
                 )
             )
         return RTResult().success(Number.null)
 
     execute_condemn.arg_names = ["list", "index", "value"]
-
 
     def execute_append(self, exec_ctx):
         list_ = exec_ctx.symbol_table.get("list")
@@ -545,7 +550,7 @@ class BuiltInFunction(BaseFunction):
                 RTError(
                     self.pos_start,
                     self.pos_end,
-                    "First argument must be list",
+                    "Okurrr, first argument must be list Bruh!",
                     exec_ctx,
                 )
             )
@@ -554,6 +559,80 @@ class BuiltInFunction(BaseFunction):
         return RTResult().success(Number.null)
 
     execute_append.arg_names = ["list", "value"]
+
+    def execute_glow_up(self, exec_ctx):
+        val = exec_ctx.symbol_table.get("value")
+        try:
+            l = val.value + 1
+        except:
+            return RTResult().failure(
+                RTError(
+                    self.pos_start,
+                    self.pos_end,
+                    "FUCK U!",
+                    exec_ctx,
+                )
+            )
+
+        return RTResult().success(Number(l))
+
+    execute_glow_up.arg_names = ["value"]
+
+    def execute_glow_down(self, exec_ctx):
+        val = exec_ctx.symbol_table.get("value")
+        try:
+            l = val.value - 1
+        except:
+            return RTResult().failure(
+                RTError(
+                    self.pos_start,
+                    self.pos_end,
+                    "ASSHOLE!",
+                    exec_ctx,
+                )
+            )
+
+        return RTResult().success(Number(l))
+
+    execute_glow_down.arg_names = ["value"]
+
+    def execute_glow_down(self, exec_ctx):
+        val = exec_ctx.symbol_table.get("value")
+        try:
+            l = val.value - 1
+        except:
+            return RTResult().failure(
+                RTError(
+                    self.pos_start,
+                    self.pos_end,
+                    "ASSHOLE!",
+                    exec_ctx,
+                )
+            )
+
+        return RTResult().success(Number(l))
+
+    execute_glow_down.arg_names = ["value"]
+
+    def execute_gacha(self, exec_ctx):
+        val1 = exec_ctx.symbol_table.get("value1")
+        val2 = exec_ctx.symbol_table.get("value2")
+        try:
+            l = random.randint(val1.value, val2.value)
+        except:
+            return RTResult().failure(
+                RTError(
+                    self.pos_start,
+                    self.pos_end,
+                    "I'm dead!",
+                    exec_ctx,
+                )
+            )
+
+        return RTResult().success(Number(l))
+
+    execute_gacha.arg_names = ["value1", "value2"]
+
 
 
     def execute_log(self, exec_ctx):
@@ -573,6 +652,114 @@ class BuiltInFunction(BaseFunction):
 
         return RTResult().success(Number(l))
     execute_log.arg_names = ["x", "base"]
+
+    def execute_pow(self, exec_ctx):
+        base = exec_ctx.symbol_table.get("base")
+        expo = exec_ctx.symbol_table.get("expo")
+        try:
+            l = math.pow(base.value, expo.value)
+        except:
+            return RTResult().failure(
+                RTError(
+                    self.pos_start,
+                    self.pos_end,
+                    "Big yikes, the POW is IMPOSSIBLE!",
+                    exec_ctx,
+                )
+            )
+
+        return RTResult().success(Number(l))
+    execute_pow.arg_names = ["base", "expo"]
+
+
+
+    def execute_sqrt(self, exec_ctx):
+        base = exec_ctx.symbol_table.get("base")
+        try:
+            l = math.sqrt(base.value)
+        except:
+            return RTResult().failure(
+                RTError(
+                    self.pos_start,
+                    self.pos_end,
+                    "Big yikes, the ROOT is IMPOSSIBLE!",
+                    exec_ctx,
+                )
+            )
+
+        return RTResult().success(Number(l))
+    execute_sqrt.arg_names = ["base"]
+
+    def execute_okboomer(self, exec_ctx):
+        genz_slang = [
+                "on god",
+                "lit",
+                "fam",
+                "flex",
+                "yeet",
+                "GOAT",
+                "salty",
+                "spill the tea",
+                "IYKYK",
+                "WAP",
+                "BUFF",
+                "stan",
+                "sus",
+                "vibing",
+                "thirsty",
+                "snack",
+                "ship",
+                "ghosting",
+                "slay",
+                "clap back",
+                "chillax",
+                "savage",
+                "wig",
+                "extra",
+                "bae",
+                "woke",
+                "troll",
+                "throw shade",
+                "finsta",
+                "selfie",
+                "TBH",
+                "okurrrrr",
+                "FOMO",
+                "YOLO",
+                "AF",
+                "lit AF",
+                "OTP",
+                "smh",
+                "on fleek",
+                "AFK",
+                "bop",
+                "glow up",
+                "squad",
+                "thicc",
+                "low key",
+                "high key",
+                "sus",
+                "sus AF",
+                "simp",
+                "stan",
+                "poggers"
+            ]
+
+        try:
+            r = random.choice(genz_slang)
+            print(str(r))
+        except:
+            return RTResult().failure(
+                RTError(
+                    self.pos_start,
+                    self.pos_end,
+                    "Big yikes, the ROOT is IMPOSSIBLE!",
+                    exec_ctx,
+                )
+            )
+
+        return RTResult().success(Number.null)
+    execute_okboomer.arg_names = []
 
     def execute_pop(self, exec_ctx):
         list_ = exec_ctx.symbol_table.get("list")
@@ -671,6 +858,9 @@ class BuiltInFunction(BaseFunction):
 
     execute_len.arg_names = ["list"]
 
+
+
+
     def execute_run(self, exec_ctx):
         fn = exec_ctx.symbol_table.get("fn")
 
@@ -743,6 +933,13 @@ BuiltInFunction.tfw = BuiltInFunction("tfw")
 BuiltInFunction.sus = BuiltInFunction("sus")
 BuiltInFunction.log = BuiltInFunction("log")
 BuiltInFunction.condemn = BuiltInFunction("condemn")
+BuiltInFunction.pow = BuiltInFunction("pow")
+BuiltInFunction.sqrt = BuiltInFunction("sqrt")
+BuiltInFunction.glow_up = BuiltInFunction("glow_up")
+BuiltInFunction.glow_down = BuiltInFunction("glow_down")
+BuiltInFunction.gacha = BuiltInFunction("gacha")
+BuiltInFunction.okboomer = BuiltInFunction("okboomer")
+BuiltInFunction.tweet = BuiltInFunction("tweet")
 
 #######################################
 # CONTEXT
@@ -1094,7 +1291,7 @@ global_symbol_table.set("L", Number.false)
 global_symbol_table.set("W", Number.true)
 global_symbol_table.set("MATH_PI", Number.math_PI)
 global_symbol_table.set("CRITICIZE", BuiltInFunction.criticize)
-global_symbol_table.set("TWEET", BuiltInFunction.criticize)
+global_symbol_table.set("TWEET", BuiltInFunction.tweet)
 global_symbol_table.set("CRITICIZE_RET", BuiltInFunction.criticize_ret)
 global_symbol_table.set("INPUT", BuiltInFunction.input)
 global_symbol_table.set("INPUT_INT", BuiltInFunction.input_int)
@@ -1114,7 +1311,12 @@ global_symbol_table.set("MATH_E", Number.math_E)
 global_symbol_table.set("SUS", BuiltInFunction.sus)
 global_symbol_table.set("LOG", BuiltInFunction.log)
 global_symbol_table.set("CONDEMN", BuiltInFunction.condemn)
-
+global_symbol_table.set("POW", BuiltInFunction.pow)
+global_symbol_table.set("SQRT", BuiltInFunction.sqrt)
+global_symbol_table.set("GLOW_UP", BuiltInFunction.glow_up)
+global_symbol_table.set("GLOW_DOWN", BuiltInFunction.glow_down)
+global_symbol_table.set("GACHA", BuiltInFunction.gacha)
+global_symbol_table.set("OKBOOMER", BuiltInFunction.okboomer)
 def run(fn, text):
     # Generate tokens
     lexer = Lexer(fn, text)
